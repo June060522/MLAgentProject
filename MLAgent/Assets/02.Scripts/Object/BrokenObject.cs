@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrokenObject : MonoBehaviour
+public class BrokenObject : MonoBehaviour, IPoppingObj
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int hp = 1;
+
+    public void PoppingObj()
     {
-        
+        hp--;
+        if (hp <= 0)
+            Broken();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Broken()
     {
-        
+        int percent = Random.Range(0, 10);
+
+        if (percent < 6)
+        {
+            ItemManager.Instance.CreateItem(transform.position);
+        }
+        Destroy(gameObject);
     }
 }

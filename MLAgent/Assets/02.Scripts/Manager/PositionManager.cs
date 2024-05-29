@@ -19,9 +19,9 @@ public class PositionManager : MonoBehaviour
         }
     }
 
-    public Vector3 GetWorldPosition(Vector2Int index)
+    public Vector3 GetWorldPosition(Vector2Int index, float y = -8.5f)
     {
-        return new Vector3(index.x * 2, -8.5f, index.y * 2);
+        return new Vector3(index.x * 2, y, index.y * 2);
     }
 
     public Vector2Int GetPositionIndex(Vector3 position)

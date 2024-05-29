@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Policies;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
 
-public class Player : Agent
+public class Player : Agent, IPoppingObj
 {
-    Rigidbody rb;
-    PlayerStat stat;
+    Rigidbody _rb;
+    [HideInInspector]public PlayerStat stat;
 
     public override void Initialize()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
         stat = new();
     }
 
     public override void OnEpisodeBegin()
     {
-        rb.velocity = Vector3.zero;
+        _rb.velocity = Vector3.zero;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -33,7 +34,7 @@ public class Player : Agent
         float moveZ = actions.ContinuousActions[1];
         Vector3 move = new Vector3(moveX, 0f, moveZ);
 
-        rb.velocity = move * stat.speed;
+        _rb.velocity = move * stat.speed;
 
         // 보상 및 종료 조건 설정 등 추가 작업 가능
     }
@@ -46,5 +47,28 @@ public class Player : Agent
         // 키보드 입력에 따라 행동을 설정
         continuousActionsOut[0] = Input.GetAxisRaw("Horizontal");
         continuousActionsOut[1] = Input.GetAxisRaw("Vertical");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            UseBomb();
+    }
+
+    private void UseBomb()
+    {
+        if (stat.maxBomb > stat.useBomb)
+        {
+            stat.useBomb++;
+            BombManager.Instance.OnUseBomb(transform.position, stat);
+        }
+    }
+
+    public Vector2Int GetPositionIndex() => PositionManager.Instance.GetPositionIndex(transform.position);
+
+    public void PoppingObj()
+    {
+        EndEpisode();
+        //Destroy(gameObject);
     }
 }
