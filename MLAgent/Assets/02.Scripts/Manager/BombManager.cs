@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class BombManager : MonoBehaviour
 {
-    public static BombManager Instance;
     [SerializeField] Bomb bomb;
 
-    private void Awake()
+    Player player;
+
+    private void Start()
     {
-        if(Instance == null)
-            Instance = this;
-        else
-        {
-            Destroy(gameObject);
-            Debug.LogError($"{transform} : BombManager is multiply running!");
-        }
+        player = transform.parent.parent.GetComponentInChildren<Player>();
     }
 
     public void OnUseBomb(Vector3 position,PlayerStat stat)
     {
-        Vector2Int worldIndex = PositionManager.Instance.GetPositionIndex(position);
-
-        Vector3 worldPos = PositionManager.Instance.GetWorldPosition(worldIndex);
-
-        Bomb bombObj = Instantiate(bomb, worldPos, Quaternion.identity);
+        position.x -= transform.parent.parent.position.x;
+        position.z -= transform.parent.parent.position.z;
+        Vector2Int worldIndex = player.positionManager.GetPositionIndex(position);
+        Vector3 worldPos = player.positionManager.GetWorldPosition(worldIndex);
+        worldIndex += new Vector2Int(7, 6);
+        Bomb bombObj = Instantiate(bomb, worldPos + transform.parent.parent.position, Quaternion.identity, player.game.parent);
         bombObj.SetStat(stat,worldIndex);
     }
 }

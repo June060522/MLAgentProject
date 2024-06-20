@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8014955385717193063}
   - component: {fileID: 7174089786763008410}
   - component: {fileID: 1728452381191371793}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Power
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -141,11 +141,11 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.33
+  m_Radius: 0.19
   m_Height: 0.21674033
   m_Direction: 1
   m_Center: {x: -0.000000059604645, y: 0.000000007450582, z: 0.05111661}

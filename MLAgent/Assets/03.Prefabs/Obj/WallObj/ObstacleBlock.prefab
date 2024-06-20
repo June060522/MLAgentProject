@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 999248593233023399}
   - component: {fileID: 6125392344335066569}
   - component: {fileID: 5152305958486374941}
-  m_Layer: 0
+  - component: {fileID: -4621052963567032933}
+  m_Layer: 10
   m_Name: ObstacleBlock
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +134,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &-4621052963567032933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400324304620182545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb1ebb21c3d4c844a420af690fd23ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

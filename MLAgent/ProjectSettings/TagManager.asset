@@ -7,19 +7,21 @@ TagManager:
   - Wall
   - Bomb
   - Obstacle
+  - Item
+  - Ghost
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Bomb
+  - Obstacle
+  - Item
+  - Block
+  - Ghost
   - 
   - 
   - 

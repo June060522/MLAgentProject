@@ -25,58 +25,56 @@ public struct ObstacleBlockSpot
 
 public class Game : MonoBehaviour
 {
-    public static Game Instance;
-
     HashSet<Player> players = new HashSet<Player>();
 
     [SerializeField] PlayerSpot[] playerList;
     [SerializeField] BrokenBlockSpot[] brokenBlockList;
     [SerializeField] ObstacleBlockSpot[] obstacleBlockList;
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-        {
-            Destroy(gameObject);
-            Debug.LogError($"{transform} : Game is multiply running!");
-        }
-    }
+    public Transform parent;
+    Player player;
+    Transform parentPos;
 
     private void Start()
     {
-        Init();
+        player = transform.parent.parent.GetComponentInChildren<Player>();
+        parentPos = transform.parent.parent.parent;
     }
 
-    private void Init()
+    public void Init()
     {
-        for(int i = 0 ; i < playerList.Length; i++)
-        {
-            GameObject player = Instantiate(playerList[i].player, PositionManager.Instance.GetWorldPosition(playerList[i].playerSpot),Quaternion.identity);
-        }
+        if (player == null)
+            player = transform.parent.parent.GetComponentInChildren<Player>();
 
+        if(parentPos == null)
+            parentPos = parent.parent.parent;
+        Debug.Log(parentPos);
+        for (int i = parent.childCount - 1; i >= 0; i--)
+        {
+            Destroy(parent.GetChild(i).gameObject);
+        }
+        //
+        for (int i = 0; i < LevelManager.instance.level + 2; i++)
+        {
+            Instantiate(playerList[Random.Range(0,3)].player, player.positionManager.GetWorldPosition(playerList[Random.Range(0, 3)].playerSpot) + parentPos.position, Quaternion.identity, parent);
+        }
         for (int i = 0; i < brokenBlockList.Length; i++)
         {
-            Vector3 worldPos = PositionManager.Instance.GetWorldPosition(brokenBlockList[i].brokenBlockSpot,-8f);
+            Vector3 worldPos = player.positionManager.GetWorldPosition(brokenBlockList[i].brokenBlockSpot, -8f);
 
             Vector2Int pos = brokenBlockList[i].brokenBlockSpot;
             pos.x += 7;
-            pos.y += 7;
+            pos.y += 6;
+            BrokenObject brokenObj = Instantiate(brokenBlockList[i].brokenBlockObj, worldPos + parentPos.position, Quaternion.identity, parent);
 
-            BrokenObject brokenObj = Instantiate(brokenBlockList[i].brokenBlockObj, worldPos, Quaternion.identity);
-
-            MapManager.Instance.SetTileType(pos, TileType.BrokenWall);
-
-            MapManager.Instance.SetPoppingObj(pos, brokenObj);
+            player.mapManager.SetPoppingObj(pos, brokenObj);
         }
 
-        for (int i = 0; i < obstacleBlockList.Length; i++)
-        {
-            Vector3 worldPos = PositionManager.Instance.GetWorldPosition(obstacleBlockList[i].obstacleBlockSpot,-8f);
+        //for (int i = 0; i < obstacleBlockList.Length; i++)
+        //{
+        //Vector3 worldPos = player.positionManager.GetWorldPosition(obstacleBlockList[i].obstacleBlockSpot,-8f);
 
 
-            GameObject obstacleBlock = Instantiate(obstacleBlockList[i].obstacleBlockObj, worldPos, Quaternion.identity);
-        }
+        //GameObject obstacleBlock = Instantiate(obstacleBlockList[i].obstacleBlockObj, worldPos + parentPos.position, Quaternion.identity, parent);
+        //}
     }
 }

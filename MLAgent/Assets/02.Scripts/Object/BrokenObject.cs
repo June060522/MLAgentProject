@@ -6,6 +6,13 @@ public class BrokenObject : MonoBehaviour, IPoppingObj
 {
     [SerializeField] private int hp = 1;
 
+    Player player;
+
+    private void Start()
+    {
+        player = transform.parent.parent.parent.GetComponentInChildren<Player>();
+    }
+
     public void PoppingObj()
     {
         hp--;
@@ -15,12 +22,18 @@ public class BrokenObject : MonoBehaviour, IPoppingObj
 
     private void Broken()
     {
+        if(player == null)
+            player = transform.parent.parent.parent.GetComponentInChildren<Player>();
+        player.mapManager.SetPoppingNull(transform.localPosition);
+
         int percent = Random.Range(0, 10);
 
         if (percent < 6)
         {
-            ItemManager.Instance.CreateItem(transform.position);
+            player.itemManager.CreateItem(transform.position);
         }
+
+
         Destroy(gameObject);
     }
 }

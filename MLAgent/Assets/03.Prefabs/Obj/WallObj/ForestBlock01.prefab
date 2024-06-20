@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4135533477319584}
   - component: {fileID: 33044299441058304}
   - component: {fileID: 23771711329110332}
-  - component: {fileID: 1031001327833833322}
-  - component: {fileID: 3464751627203871673}
-  m_Layer: 0
+  - component: {fileID: 8259497185195408904}
+  - component: {fileID: 5930030549176763274}
+  m_Layer: 6
   m_Name: ForestBlock01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1031001327833833322
+--- !u!65 &8259497185195408904
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,9 +104,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000005, y: 2.0000002, z: 2.0000005}
+  m_Size: {x: 2.0000002, y: 2.0000002, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3464751627203871673
+--- !u!54 &5930030549176763274
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262887121042734}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

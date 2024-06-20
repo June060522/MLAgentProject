@@ -4,28 +4,21 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    public static ItemManager Instance;
-
     [SerializeField] private ItemListSO itemList;
+    Player player;
 
-    private void Awake()
+    private void Start()
     {
-        if(Instance == null)
-            Instance = this;
-        else
-        {
-            Debug.LogError($"{transform} : ItemManager is multiply running!");
-            Destroy(gameObject);
-        }
+        player = transform.parent.parent.GetComponentInChildren<Player>();
     }
 
     public void CreateItem(Vector3 position)
     {
         int index = Random.Range(0,itemList.items.Count);
-        Vector2Int positionIndex = PositionManager.Instance.GetPositionIndex(position);
+        Vector2Int positionIndex = player.positionManager.GetPositionIndex(position);
 
-        Vector3 worldPosition = PositionManager.Instance.GetWorldPosition(positionIndex);
-
-        Instantiate(itemList.items[index],worldPosition,Quaternion.identity);
+        Vector3 worldPosition = player.positionManager.GetWorldPosition(positionIndex);
+        worldPosition.y += 1.0f;
+        Instantiate(itemList.items[index],worldPosition,Quaternion.identity, player.game.parent);
     }
 }

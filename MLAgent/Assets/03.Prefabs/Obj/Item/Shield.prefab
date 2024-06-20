@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7196306359234141018}
   - component: {fileID: 2736770264851403321}
   - component: {fileID: 6686494493033439320}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,11 +141,11 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.33
+  m_Radius: 1.13
   m_Height: 0.50678796
   m_Direction: 1
   m_Center: {x: 0, y: 0.0021670011, z: 0.05157196}
